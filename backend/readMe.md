@@ -132,19 +132,20 @@ Réponse attendue :
 
 ## API Endpoints
 
-| Méthode    | Endpoint              | Login | Admin | Description                      |
-| ---------- | --------------------- | ----- | ----- | -------------------------------- |
-| **GET**    | `/api/auth/`          | ✅    | ✅    | Liste des utilisateurs           |
-| **GET**    | `/api/auth/:id`       | ✅    | ❌    | Afficher skill d'un utilisateur  |
-| **POST**   | `/api/auth/register`  | ❌    | ❌    | Créer un utilisateur             |
-| **POST**   | `/api/auth/login`     | ❌    | ❌    | Se connecter                     |
-| **POST**   | `/api/auth/logout`    | ✅    | ❌    | Se déconnecter                   |
-| **DELETE** | `/api/auth/:id`       | ✅    | ✅    | Supprimer un utilisateur         |
-| **POST**   | `/api/skill/addSkill` | ✅    | ❌    | Ajouter un skill à l'utilisateur |
-| **PUT**    | `/api/skill/:id`      | ✅    | ❌    | Mettre à jour un skill           |
-| **DELETE** | `/api/skill/:id`      | ✅    | ❌    | Supprimer un skill               |
-| **GET**    | `/api/setting/`       | ✅    | ❌    | Liste du setting utilisateur     |
-| **POST**   | `/api/setting/theme`  | ✅    | ❌    | Mettre à jour le thème           |
+| Méthode    | Endpoint              | Login | Admin | Description                          |
+| ---------- | --------------------- | ----- | ----- | ------------------------------------ |
+| **GET**    | `/api/auth/`          | ✅    | ✅    | Liste des utilisateurs               |
+| **GET**    | `/api/auth/:id`       | ✅    | ❌    | Afficher skill d'un utilisateur      |
+| **POST**   | `/api/auth/register`  | ❌    | ❌    | Créer un utilisateur                 |
+| **POST**   | `/api/auth/login`     | ❌    | ❌    | Se connecter                         |
+| **POST**   | `/api/auth/logout`    | ✅    | ❌    | Se déconnecter                       |
+| **DELETE** | `/api/auth/:id`       | ✅    | ✅    | Supprimer un utilisateur             |
+| **POST**   | `/api/skill/addSkill` | ✅    | ❌    | Ajouter un skill à l'utilisateur     |
+| **PUT**    | `/api/skill/:id`      | ✅    | ❌    | Mettre à jour un skill               |
+| **DELETE** | `/api/skill/:id`      | ✅    | ❌    | Supprimer un skill                   |
+| **GET**    | `/api/setting/`       | ✅    | ❌    | Liste du setting utilisateur         |
+| **POST**   | `/api/setting/theme`  | ✅    | ❌    | Mettre à jour le thème               |
+| **POST**   | `/api/setting/skill`  | ✅    | ❌    | Mettre à jour le la forme des skills |
 
 ## Sécurité
 

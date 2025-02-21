@@ -1,4 +1,5 @@
 import User from "../models/Users.js";
+import Settings from "../models/Setting.js";
 import bcrypt from "bcrypt";
 
 import { loginSchema, registerSchema } from "../validations/authValidation.js";
@@ -21,11 +22,15 @@ export const createUser = async (req, res, next) => {
     const salRound = 10;
     const hashedPassword = await bcrypt.hash(String(password), salRound);
 
+    const newSettings = new Settings();
+    await newSettings.save();
+
     const newUser = await User.create({
       name,
       email,
       password: hashedPassword,
       role,
+      settings: newSettings._id,
     });
 
     res.status(201).json({
