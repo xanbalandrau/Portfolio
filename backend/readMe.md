@@ -79,7 +79,8 @@ Réponse attendue :
     "_id":"67b89e0eebbbf9d655d648dd",
     "name":"admin",
     "email":"admin@gmail.com",
-    "password":"$2b$10$hPCs9CwBH6wTW.yCNRSZeO9SlzYzahs5GURY7RnsB7VugasV/UMtW","role":"admin",
+    "password":"$2b$10$hPCs9CwBH6wTW.yCNRSZeO9SlzYzahs5GURY7RnsB7VugasV/UMtW",
+    "role":"admin",
     "skill":["67b89e2debbbf9d655d648e2"],
     "createdAt":"2025-02-21T15:38:54.164Z",
     "updatedAt":"2025-02-21T15:39:25.271Z",
@@ -134,7 +135,7 @@ Réponse attendue :
 | Méthode    | Endpoint              | Login | Admin | Description                      |
 | ---------- | --------------------- | ----- | ----- | -------------------------------- |
 | **GET**    | `/api/auth/`          | ✅    | ✅    | Liste des utilisateurs           |
-| **GET**    | `/api/auth/:id`       | ✅    | ❌    | Afficher un utilisateur          |
+| **GET**    | `/api/auth/:id`       | ✅    | ❌    | Afficher skill d'un utilisateur  |
 | **POST**   | `/api/auth/register`  | ❌    | ❌    | Créer un utilisateur             |
 | **POST**   | `/api/auth/login`     | ❌    | ❌    | Se connecter                     |
 | **POST**   | `/api/auth/logout`    | ✅    | ❌    | Se déconnecter                   |

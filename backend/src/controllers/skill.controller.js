@@ -3,7 +3,10 @@ import User from "../models/Users.js";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 
-import { addSkillSchema, updateSkillSchema } from "../validations/skillValidation.js";
+import {
+  addSkillSchema,
+  updateSkillSchema,
+} from "../validations/skillValidation.js";
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -92,6 +95,41 @@ export const deleteSkill = async (req, res, next) => {
     res.status(200).json({ message: "Skill deleted successfully", user });
   } catch (error) {
     next(error);
+  }
+};
+
+export const deleteSkillWithUser = async (skillId, userId) => {
+  try {
+    const skill = await Skill.findByIdAndDelete(skillId);
+    if (!skill) {
+      throw new Error("Skill not found");
+    }
+
+    if (skill.public_id) {
+      try {
+        const cloudinaryResponse = await cloudinary.uploader.destroy(
+          skill.public_id
+        );
+
+        if (cloudinaryResponse.result !== "ok") {
+          throw new Error("Error deleting image on Cloudinary");
+        }
+      } catch (cloudinaryError) {
+        console.error("Error Cloudinary :", cloudinaryError);
+        throw new Error("Error deleting image on Cloudinary");
+      }
+    }
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { skill: skill.id } },
+      { new: true }
+    ).select("-password");
+
+    await user.save();
+    return { message: "Skill deleted successfully", user };
+  } catch (error) {
+    throw error;
   }
 };
 

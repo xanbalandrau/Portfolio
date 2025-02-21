@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 
 import { loginSchema, registerSchema } from "../validations/authValidation.js";
 import { generateToken } from "../middleware/tokenGenerator.js";
+import { deleteSkillWithUser } from "./skill.controller.js";
 
 export const createUser = async (req, res, next) => {
   const { error, value } = registerSchema.validate(req.body);
@@ -107,8 +108,16 @@ export const getUserSkill = async (req, res, next) => {
 export const deleteUser = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const user = await User.findByIdAndDelete(id);
-    if (!user) {
+    const user = await User.findById(id);
+
+    if (user.skill && user.skill.length > 0) {
+      for (let skillId of user.skill) {
+        await deleteSkillWithUser(skillId, id);
+      }
+    }
+
+    const userdelete = await User.findByIdAndDelete(id);
+    if (!userdelete) {
       return next({ status: 404, message: "User not found" });
     }
 
