@@ -10,4 +10,5 @@ export const updateSkillSchema = Joi.object({
   title: Joi.string().min(3).max(20).required(),
   category: Joi.string().min(3).max(20).required(),
   level: Joi.string().valid("Beginner", "Intermediate", "Advanced").required(),
+  imageFile: Joi.any(),
 });

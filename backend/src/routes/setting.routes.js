@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 router.get("/", protect, allSettings);
-router.post("/theme", protect, updateTheme);
-router.post("/skill", protect, updateSkill);
+router.put("/theme", protect, updateTheme);
+router.put("/skill", protect, updateSkill);
 
 export default router;

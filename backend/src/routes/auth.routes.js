@@ -1,6 +1,7 @@
 import express from "express";
 
 import {
+  checkAuth,
   createUser,
   deleteUser,
   forgotPassword,
@@ -19,6 +20,7 @@ router.get("/", protect, protectAdmin, getAllUsers);
 router.get("/:id", protect, getUserSkill);
 router.post("/register", createUser);
 router.post("/login", loginUser);
+router.post("/check-auth", protect, checkAuth);
 router.post("/logout", protect, logoutUser);
 router.delete("/:id", protect, protectAdmin, deleteUser);
 router.get("/verify/:token", verifyEmail);

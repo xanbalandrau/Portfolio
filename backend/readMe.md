@@ -62,6 +62,7 @@ CLOUD_NAME = <votre nom de compte Cloudinary>
 API_KEY = <votre clé API Cloudinary>
 API_SECRET = <votre clé secrète API Cloudinary>
 JWT_SECRET = <votre clé secrète pour JWT>
+API_URL = <votre URL du backend>
 RECAPTCHA_SECRET_KEY = <votre clé secrète reCAPTCHA>
 EMAIL_HOST= <votre service SMTP>
 EMAIL_USER= <votre adresse e-mail>
@@ -146,7 +147,7 @@ Réponse attendue :
 │   ├── routes/                     # Routes pour accéder aux différents services de l'API
 │   │   ├── auth.routes.js          # Routes d'authentification (login, register)
 │   │   ├── setting.routes.js       # Routes pour la gestion des paramètres
-│   │   ├── skill.routes.js
+│   │   ├── skill.routes.js         # Routes pour la gestion des skills
 │   ├── services/                   # Service qui utilise des services externe
 │   │   ├── emailService.js         # Service pour l'envoi d'e-mails
 │   ├── validations/                # Fichiers de validation des entrées de l'utilisateur
@@ -168,6 +169,7 @@ Réponse attendue :
 | **GET**    | `/api/auth//verify/:token`        | ❌    | ❌    | Envoie un email de vérification          |
 | **POST**   | `/api/auth/register`              | ❌    | ❌    | Créer un utilisateur                     |
 | **POST**   | `/api/auth/login`                 | ❌    | ❌    | Se connecter                             |
+| **POST**   | `/api/auth/check-auth`            | ✅    | ❌    | Verifie si connecter (possède le token)  |
 | **POST**   | `/api/auth/logout`                | ✅    | ❌    | Se déconnecter                           |
 | **POST**   | `/api/auth/forgot-password`       | ❌    | ❌    | Envoie email pour reset son mot de passe |
 | **POST**   | `/api/auth/reset-password/:token` | ❌    | ❌    | Mettre à jour son mot de passe           |
@@ -176,8 +178,10 @@ Réponse attendue :
 | **PUT**    | `/api/skill/:id`                  | ✅    | ❌    | Mettre à jour un skill                   |
 | **DELETE** | `/api/skill/:id`                  | ✅    | ❌    | Supprimer un skill                       |
 | **GET**    | `/api/setting/`                   | ✅    | ❌    | Liste du setting utilisateur             |
-| **POST**   | `/api/setting/theme`              | ✅    | ❌    | Mettre à jour le thème                   |
-| **POST**   | `/api/setting/skill`              | ✅    | ❌    | Mettre à jour le la forme des skills     |
+| **PUT**    | `/api/setting/theme`              | ✅    | ❌    | Mettre à jour le thème                   |
+| **PUT**    | `/api/setting/skill`              | ✅    | ❌    | Mettre à jour le la forme des skills     |
+
+Voir [Postman collection](https://documenter.getpostman.com/view/42547154/2sAYdcqruV) sur le navigateur.
 
 ## Sécurité
 
@@ -188,6 +192,7 @@ Utilisation de nodemailer pour la vérification de l'utilisateur. Un token est g
 ### Authentification:
 
 Utilisation de JWT pour l'authentification. Un token est généré lors de la connexion et est inclus dans le header `Cookies`.
+Etant en cookies, on ne pourra pas le récuperer dans le frontend. Par conséquent, on va utiliser la route `/api/auth/check-auth` pour verifier l'authentification de l'utilisateur, et on renverra true ou false.
 
 ### Autorisation:
 

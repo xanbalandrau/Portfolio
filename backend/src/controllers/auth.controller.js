@@ -16,6 +16,8 @@ import {
 } from "../middleware/tokenGenerator.js";
 import { deleteSkillWithUser } from "./skill.controller.js";
 
+const API_URL = process.env.API_URL;
+
 export const createUser = async (req, res, next) => {
   const { error, value } = registerSchema.validate(req.body);
   if (error) {
@@ -46,7 +48,7 @@ export const createUser = async (req, res, next) => {
     await newUser.save();
 
     const token = generateTokenFast(newUser);
-    const verifyUrl = `http://localhost:${process.env.PORT}/api/auth/verify/${token}`;
+    const verifyUrl = `${API_URL}/api/auth/verify/${token}`;
     await sendEmail(
       newUser.email,
       "Vérification de compte",
@@ -89,6 +91,8 @@ export const loginUser = async (req, res, next) => {
 
     res.cookie("token", token, {
       httpOnly: true,
+      secure: true,
+      sameSite: "strict",
     });
     res.status(201).json({
       success: true,
@@ -97,6 +101,25 @@ export const loginUser = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
+  }
+};
+
+export const checkAuth = async (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ isAuth: false });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      return res.status(404).json({ isAuth: false });
+    }
+
+    res.status(200).json({ isAuth: true, user });
+  } catch (error) {
+    res.status(401).json({ isAuth: false });
   }
 };
 
@@ -197,7 +220,7 @@ export const forgotPassword = async (req, res, next) => {
 
     const token = generateTokenFast(user);
 
-    const resetUrl = `http://localhost:${process.env.PORT}/api/auth/reset-password/${token}`;
+    const resetUrl = `${API_URL}/api/auth/reset-password/${token}`;
     await sendEmail(
       user.email,
       "Réinitialisation du mot de passe",
