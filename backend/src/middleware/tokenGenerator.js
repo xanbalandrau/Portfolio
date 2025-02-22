@@ -5,6 +5,14 @@ export const generateToken = (user) => {
   return jwt.sign(
     { id: user.id, email: user.email, role: user.role },
     JWT_SECRET,
-    { expiresIn: "2h" }
+    { expiresIn: "4h" }
+  );
+};
+
+export const generateTokenFast = (user) => {
+  return jwt.sign(
+    { id: user.id, email: user.email, role: user.role },
+    JWT_SECRET,
+    { expiresIn: "15m" }
   );
 };

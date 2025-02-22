@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema(
     },
     password: { type: String, required: true },
     role: { type: String, enum: ["user", "admin"], default: "user" },
+    isVerified: { type: Boolean, default: false },
     skill: [{ type: mongoose.Schema.Types.ObjectId, ref: "Skill" }],
     settings: { type: mongoose.Schema.Types.ObjectId, ref: "Settings" },
   },

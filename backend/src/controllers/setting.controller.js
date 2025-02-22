@@ -18,6 +18,8 @@ export const allSettings = async (req, res, next) => {
   }
 };
 
+
+
 export const updateTheme = async (req, res, next) => {
   try {
     const userId = req.user.id;

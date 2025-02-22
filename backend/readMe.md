@@ -11,10 +11,33 @@ Il permet de gérer les utilisateurs, leurs compétences et leurs paramètres.
 - npm (gestionnaire de paquets)
 - MongoDb (Une base de données configurée)
 - Cloudinary (Avoir un compte pour récuperer l'API)
+- Un compte email (j'ai utilisé Mailtrap pour les tests)
 
 ## Dépendance installé
 
-<img src="../ressources/dependenciesBACK.png">
+```
+"dependencies": {
+        "axios": "^1.7.9",
+        "bcrypt": "^5.1.1",
+        "cloudinary": "^2.5.1",
+        "cookie-parser": "^1.4.7",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2",
+        "express-async-handler": "^1.2.0",
+        "fs": "^0.0.1-security",
+        "gitignore": "^0.7.0",
+        "helmet": "^8.0.0",
+        "joi": "^17.13.3",
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^8.10.1",
+        "morgan": "^1.10.0",
+        "multer": "^1.4.5-lts.1",
+        "nodemailer": "^6.10.0",
+        "nodemon": "^3.1.9",
+        "winston": "^3.17.0"
+      }
+```
 
 ## Installation
 
@@ -40,6 +63,10 @@ API_KEY = <votre clé API Cloudinary>
 API_SECRET = <votre clé secrète API Cloudinary>
 JWT_SECRET = <votre clé secrète pour JWT>
 RECAPTCHA_SECRET_KEY = <votre clé secrète reCAPTCHA>
+EMAIL_HOST= <votre service SMTP>
+EMAIL_USER= <votre adresse e-mail>
+EMAIL_PASS= <mot de passe d'application ou mot de passe SMTP>
+EMAIL_PORT= <465 pour SSL ou 587 pour TLS par exemple>
 ```
 
 4. Lancez le serveur:
@@ -119,7 +146,9 @@ Réponse attendue :
 │   ├── routes/                     # Routes pour accéder aux différents services de l'API
 │   │   ├── auth.routes.js          # Routes d'authentification (login, register)
 │   │   ├── setting.routes.js       # Routes pour la gestion des paramètres
-│   │   ├── skill.routes.js         # Routes pour la gestion des compétences
+│   │   ├── skill.routes.js
+│   ├── services/                   # Service qui utilise des services externe
+│   │   ├── emailService.js         # Service pour l'envoi d'e-mails
 │   ├── validations/                # Fichiers de validation des entrées de l'utilisateur
 │   │   ├── authValidation.js       # Validation des données d'authentification
 │   │   ├── skillValidation.js      # Validation des données pour les compétences
@@ -132,24 +161,31 @@ Réponse attendue :
 
 ## API Endpoints
 
-| Méthode    | Endpoint              | Login | Admin | Description                          |
-| ---------- | --------------------- | ----- | ----- | ------------------------------------ |
-| **GET**    | `/api/auth/`          | ✅    | ✅    | Liste des utilisateurs               |
-| **GET**    | `/api/auth/:id`       | ✅    | ❌    | Afficher skill d'un utilisateur      |
-| **POST**   | `/api/auth/register`  | ❌    | ❌    | Créer un utilisateur                 |
-| **POST**   | `/api/auth/login`     | ❌    | ❌    | Se connecter                         |
-| **POST**   | `/api/auth/logout`    | ✅    | ❌    | Se déconnecter                       |
-| **DELETE** | `/api/auth/:id`       | ✅    | ✅    | Supprimer un utilisateur             |
-| **POST**   | `/api/skill/addSkill` | ✅    | ❌    | Ajouter un skill à l'utilisateur     |
-| **PUT**    | `/api/skill/:id`      | ✅    | ❌    | Mettre à jour un skill               |
-| **DELETE** | `/api/skill/:id`      | ✅    | ❌    | Supprimer un skill                   |
-| **GET**    | `/api/setting/`       | ✅    | ❌    | Liste du setting utilisateur         |
-| **POST**   | `/api/setting/theme`  | ✅    | ❌    | Mettre à jour le thème               |
-| **POST**   | `/api/setting/skill`  | ✅    | ❌    | Mettre à jour le la forme des skills |
+| Méthode    | Endpoint                          | Login | Admin | Description                              |
+| ---------- | --------------------------------- | ----- | ----- | ---------------------------------------- |
+| **GET**    | `/api/auth/`                      | ✅    | ✅    | Liste des utilisateurs                   |
+| **GET**    | `/api/auth/:id`                   | ✅    | ❌    | Afficher skill d'un utilisateur          |
+| **GET**    | `/api/auth//verify/:token`        | ❌    | ❌    | Envoie un email de vérification          |
+| **POST**   | `/api/auth/register`              | ❌    | ❌    | Créer un utilisateur                     |
+| **POST**   | `/api/auth/login`                 | ❌    | ❌    | Se connecter                             |
+| **POST**   | `/api/auth/logout`                | ✅    | ❌    | Se déconnecter                           |
+| **POST**   | `/api/auth/forgot-password`       | ❌    | ❌    | Envoie email pour reset son mot de passe |
+| **POST**   | `/api/auth/reset-password/:token` | ❌    | ❌    | Mettre à jour son mot de passe           |
+| **DELETE** | `/api/auth/:id`                   | ✅    | ✅    | Supprimer un utilisateur                 |
+| **POST**   | `/api/skill/addSkill`             | ✅    | ❌    | Ajouter un skill à l'utilisateur         |
+| **PUT**    | `/api/skill/:id`                  | ✅    | ❌    | Mettre à jour un skill                   |
+| **DELETE** | `/api/skill/:id`                  | ✅    | ❌    | Supprimer un skill                       |
+| **GET**    | `/api/setting/`                   | ✅    | ❌    | Liste du setting utilisateur             |
+| **POST**   | `/api/setting/theme`              | ✅    | ❌    | Mettre à jour le thème                   |
+| **POST**   | `/api/setting/skill`              | ✅    | ❌    | Mettre à jour le la forme des skills     |
 
 ## Sécurité
 
-### Authentification :
+### Validation de l'email:
+
+Utilisation de nodemailer pour la vérification de l'utilisateur. Un token est généré puis envoyé par email lors de l'inscription. En cliquant sur le lien, l'utilisteur sera vérifié. Ansi, 'isVerified'(dans le model User) passera en true.
+
+### Authentification:
 
 Utilisation de JWT pour l'authentification. Un token est généré lors de la connexion et est inclus dans le header `Cookies`.
 
@@ -157,10 +193,15 @@ Utilisation de JWT pour l'authentification. Un token est généré lors de la co
 
 Certaines routes sont réservées aux utilisateurs ou aux administrateurs. Le middleware `authMiddleware.js` vérifie le rôle de l'utilisateur avant d'autoriser l'accès.
 
-## reCAPTCHA :
+## reCAPTCHA:
 
 Intégration de reCAPTCHA pour prévenir les bots.
 
 ## Auteur:
 
 Xan Balandrau : [**GitHub**](https://github.com/xanbalandrau/)
+
+## Amélioration future
+
+- Ajout photo de profil pour l'utilisateur
+- Ajout description (bio) de l'utilisateur

@@ -1,9 +1,19 @@
 import User from "../models/Users.js";
 import Settings from "../models/Setting.js";
 import bcrypt from "bcrypt";
+import sendEmail from "../services/emailService.js";
+import jwt from "jsonwebtoken";
 
-import { loginSchema, registerSchema } from "../validations/authValidation.js";
-import { generateToken } from "../middleware/tokenGenerator.js";
+import {
+  forgotPasswordSchema,
+  loginSchema,
+  registerSchema,
+  resetPasswordSchema,
+} from "../validations/authValidation.js";
+import {
+  generateToken,
+  generateTokenFast,
+} from "../middleware/tokenGenerator.js";
 import { deleteSkillWithUser } from "./skill.controller.js";
 
 export const createUser = async (req, res, next) => {
@@ -22,16 +32,26 @@ export const createUser = async (req, res, next) => {
     const salRound = 10;
     const hashedPassword = await bcrypt.hash(String(password), salRound);
 
-    const newSettings = new Settings();
-    await newSettings.save();
-
     const newUser = await User.create({
       name,
       email,
       password: hashedPassword,
       role,
-      settings: newSettings._id,
     });
+
+    const newSettings = new Settings({ userId: newUser.id });
+    await newSettings.save();
+
+    newUser.settings = newSettings.id;
+    await newUser.save();
+
+    const token = generateTokenFast(newUser);
+    const verifyUrl = `http://localhost:${process.env.PORT}/api/auth/verify/${token}`;
+    await sendEmail(
+      newUser.email,
+      "Vérification de compte",
+      `Cliquez ici pour valider votre compte : ${verifyUrl}`
+    );
 
     res.status(201).json({
       success: true,
@@ -59,6 +79,10 @@ export const loginUser = async (req, res, next) => {
     const validatePassword = await bcrypt.compare(password, user.password);
     if (!validatePassword) {
       return next({ status: 401, message: "Invalid email or password" });
+    }
+
+    if (!user.isVerified) {
+      return next({ status: 403, message: "Account not verified" });
     }
 
     const token = generateToken(user);
@@ -121,6 +145,10 @@ export const deleteUser = async (req, res, next) => {
       }
     }
 
+    if (user.settings) {
+      await Settings.findByIdAndDelete(user.settings);
+    }
+
     const userdelete = await User.findByIdAndDelete(id);
     if (!userdelete) {
       return next({ status: 404, message: "User not found" });
@@ -129,6 +157,78 @@ export const deleteUser = async (req, res, next) => {
     res
       .status(200)
       .json({ success: true, message: "User deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const verifyEmail = async (req, res, next) => {
+  try {
+    const { token } = req.params;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await User.findById(decoded.id);
+    if (!user) return next({ status: 404, message: "User not found" });
+
+    if (user.isVerified)
+      return next({ status: 400, message: "User already verified" });
+
+    user.isVerified = true;
+    await user.save();
+
+    res.json({ message: "✅ Email verified !" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const forgotPassword = async (req, res, next) => {
+  const { error, value } = forgotPasswordSchema.validate(req.body);
+  if (error) {
+    return next(error);
+  }
+
+  const { email } = value;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user)
+      return next({ status: 404, message: "User with this email not found" });
+
+    const token = generateTokenFast(user);
+
+    const resetUrl = `http://localhost:${process.env.PORT}/api/auth/reset-password/${token}`;
+    await sendEmail(
+      user.email,
+      "Réinitialisation du mot de passe",
+      `Cliquez ici : ${resetUrl}`
+    );
+
+    res.json({ message: "Email sent for password reset" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const resetPassword = async (req, res, next) => {
+  const { error, value } = resetPasswordSchema.validate(req.body);
+  if (error) {
+    return next(error);
+  }
+
+  const { password } = value;
+  const { token } = req.params;
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
+    if (!user)
+      return next({ status: 404, message: "User with this token not found" });
+
+    user.password = await bcrypt.hash(password, 10);
+    await user.save();
+
+    res.json({ message: "Password changed successfully" });
   } catch (error) {
     next(error);
   }
