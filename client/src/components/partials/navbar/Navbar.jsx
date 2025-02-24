@@ -1,18 +1,79 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import LogoutButton from "../../logoutButton";
+import { useAuth } from "../../../context/AuthContext";
+import { Container, Nav, Navbar, NavbarBrand } from "react-bootstrap";
+import "./NavBar.css";
 
-const Navbar = () => {
+const NavBar = () => {
+  const { user, isAdmin } = useAuth();
+  const [expand, updateExpanded] = useState(false);
+
   return (
-    <div>
-      <Link to={"/"}>h</Link>
-      <Link to={"/register"}>r</Link>
-      <Link to={"/login"}>l</Link>
-      <Link to={"/portfolio"}>p</Link>
-      <Link to={"/dashboardUser"}>du</Link>
-      <Link to={"/dashboard"}>d</Link>
-      <LogoutButton />
-    </div>
+    <Navbar expanded={expand} fixed="top" expand="md" className="navbar">
+      <Container>
+        <NavbarBrand>
+          <Link to="/" onClick={() => updateExpanded(false)}>
+            Home
+          </Link>
+        </NavbarBrand>
+
+        <Navbar.Toggle
+          aria-controls="responsive-navbar-nav"
+          onClick={() => {
+            updateExpanded(expand ? false : "expanded");
+          }}
+        >
+          <span className="navbar-toggler-icon"></span>
+        </Navbar.Toggle>
+
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="ms-auto" defaultActiveKey="#home">
+            {user ? (
+              <>
+                <Nav.Item>
+                  <Link to="/portfolio" onClick={() => updateExpanded(false)}>
+                    Portfolio
+                  </Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Link
+                    to="/dashboardUser"
+                    onClick={() => updateExpanded(false)}
+                  >
+                    Dashboard
+                  </Link>
+                </Nav.Item>
+                {isAdmin ? (
+                  <Link to="/dashboard" onClick={() => updateExpanded(false)}>
+                    Dashboard Admin
+                  </Link>
+                ) : (
+                  ""
+                )}
+                <Nav.Item>
+                  <LogoutButton />
+                </Nav.Item>
+              </>
+            ) : (
+              <>
+                <Nav.Item>
+                  <Link to="/register" onClick={() => updateExpanded(false)}>
+                    Resgister
+                  </Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Link to="/login" onClick={() => updateExpanded(false)}>
+                    Login
+                  </Link>
+                </Nav.Item>
+              </>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 
-export default Navbar;
+export default NavBar;

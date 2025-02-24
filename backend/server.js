@@ -1,7 +1,6 @@
 import "dotenv/config";
 
 import express from "express";
-import cookieParser from "cookie-parser";
 import cors from "cors";
 import helmet from "helmet";
 
@@ -17,12 +16,8 @@ const app = express();
 app.use(morganMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 app.use(helmet());
-app.use(cors({
-  origin: process.env.CLIENT_URL,
-  credentials: true
-}));
+app.use(cors());
 
 connectDB();
 

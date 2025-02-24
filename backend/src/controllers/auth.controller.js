@@ -89,43 +89,21 @@ export const loginUser = async (req, res, next) => {
 
     const token = generateToken(user);
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict",
-    });
     res.status(201).json({
       success: true,
       message: "User logged in successfully",
       user,
+      token,
     });
   } catch (error) {
     next(error);
   }
 };
 
-export const checkAuth = async (req, res) => {
-  try {
-    const token = req.cookies.token;
-    if (!token) {
-      return res.status(401).json({ isAuth: false });
-    }
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.id);
-    if (!user) {
-      return res.status(404).json({ isAuth: false });
-    }
-
-    res.status(200).json({ isAuth: true, user });
-  } catch (error) {
-    res.status(401).json({ isAuth: false });
-  }
-};
-
 export const logoutUser = async (req, res, next) => {
   try {
-    res.clearCookie("token");
+    res.removeHeader("Authorization");
+
     res
       .status(200)
       .json({ success: true, message: "User logged out successfully" });

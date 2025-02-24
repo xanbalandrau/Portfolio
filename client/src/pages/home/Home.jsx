@@ -1,9 +1,16 @@
-
+import OngletTitle from "../../hooks/OngletTitle";
 
 const Home = () => {
+  OngletTitle("Home");
   return (
-    <div>Home</div>
-  )
-}
+    <section>
+      <h1>Home</h1>
 
-export default Home
+      <p>Welcome to the Home page</p>
+
+      <p>This is the content of the Home page</p>
+    </section>
+  );
+};
+
+export default Home;

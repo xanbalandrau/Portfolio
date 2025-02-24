@@ -18,4 +18,17 @@ const skillSchema = new mongoose.Schema({
   public_id: { type: String },
 });
 
+// Middleware pour limiter à 6 skills
+skillSchema.pre("save", async function (next) {
+  const Skill = mongoose.model("Skill");
+
+  const count = await Skill.countDocuments();
+  if (count > 6) {
+    const error = new Error("Vous ne pouvez pas ajouter plus de 6 skills.");
+    return next(error);
+  }
+
+  next();
+});
+
 export default mongoose.model("Skill", skillSchema);

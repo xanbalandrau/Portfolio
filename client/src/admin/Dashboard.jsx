@@ -1,8 +1,8 @@
+import OngletTitle from "../hooks/OngletTitle";
 
 const Dashboard = () => {
-  return (
-    <div>Dashboard</div>
-  )
-}
+  OngletTitle("Dashboard Admin");
+  return <div>Dashboard</div>;
+};
 
-export default Dashboard
+export default Dashboard;

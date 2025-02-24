@@ -1,0 +1,25 @@
+.navbar {
+  position: sticky !important;
+  background-color: var(--secondary-color);
+}
+
+.navbar a {
+  color: var(--text-color) !important;
+  text-decoration: none;
+  margin-right: 1rem;
+  font-weight: 500;
+}
+
+.navbar-toggler-icon {
+  background-color: #fff !important;
+  border-radius: 5px !important;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+.navbar-toggler-icon {
+  color: #fff !important;
+  font-size: 1.5rem !important;
+  cursor: pointer !important;
+}

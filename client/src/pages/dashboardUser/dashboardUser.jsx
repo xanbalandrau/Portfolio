@@ -1,8 +1,9 @@
+import OngletTitle from "../../hooks/OngletTitle";
 
 const dashboardUser = () => {
-  return (
-    <div>dashboardUser</div>
-  )
-}
+  OngletTitle("Dashboard");
 
-export default dashboardUser
+  return <div>dashboardUser</div>;
+};
+
+export default dashboardUser;

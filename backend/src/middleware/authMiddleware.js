@@ -3,7 +3,7 @@ import User from "../models/Users.js";
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export const protect = async (req, res, next) => {
-  const token = req.cookies.token;
+  const token = req.header("Authorization").replace("Bearer ", "").trim();
   if (!token) {
     return res
       .status(401)
@@ -33,8 +33,14 @@ export const protect = async (req, res, next) => {
 };
 
 export const protectAdmin = async (req, res, next) => {
-  if (req.user.role !== "admin") {
-    return res.status(403).json({ message: "Unauthorized User" });
+  try {
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ message: "Unauthorized User" });
+    }
+    next();
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error verifying token admin", error: error.message });
   }
-  next();
 };

@@ -1,0 +1,11 @@
+:root {
+  --primary-color: hsl(204, 70%, 53%);
+  --secondary-color: #292929;
+  --third-color: #4caf50;
+  --text-color: #ffffff;
+  --text-color-dark: #ffffff;
+
+  --background-color: #ecf0f1;
+  --background-color-dark: #1a1a1a;
+  --error-color: #e74c3c;
+}

@@ -1,59 +1,57 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import { Navigate } from "react-router-dom";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const AuthContext = createContext();
 
-export const AuthContext = createContext();
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
 
 export const AuthProvider = ({ children }) => {
+  const [token, setToken] = useState(localStorage);
   const [user, setUser] = useState(null);
-  const [isAuth, setIsAuth] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/api/auth/check-auth`, {
-          withCredentials: true,
-        });
+    const token = localStorage.getItem("token");
+    if (token) {
+      setToken(token);
+      const userDecoded = jwtDecode(token);
+      setUser(userDecoded);
 
-        setIsAuth(response.data.isAuth);
-        setUser(response.data.user);
-
-        if (response.data.user.role === "admin") {
-          setIsAdmin(true);
-        }
-      } catch (error) {
-        setIsAuth(false);
-        setUser(null);
-        console.error("Error checking authentication:", error);
+      if (userDecoded.role === "admin") {
+        setIsAdmin(true);
       }
-    };
 
-    checkAuth();
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
   }, []);
 
-  const login = (userData) => {
-    setIsAuth(true);
-    setUser(userData);
-  };
+  const login = (token) => {
+    setToken(token);
+    const userDecoded = jwtDecode(token);
+    setUser(userDecoded);
 
-  const logout = async () => {
-    try {
-      await axios.post(
-        `${API_URL}/api/auth/logout`,
-        {},
-        { withCredentials: true }
-      );
-      setIsAuth(false);
-      setUser(null);
-    } catch (error) {
-      console.error("Logout failed:", error);
+    if (userDecoded.role === "admin") {
+      setIsAdmin(true);
     }
+
+    localStorage.setItem("token", token);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  };
+  const logout = () => {
+    setToken(null);
+    setUser(null);
+    setIsAdmin(false);
+    localStorage.removeItem("token");
+    delete axios.defaults.headers.common["Authorization"];
+    return <Navigate to="/login" />;
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuth, isAdmin, login, logout }}>
+    <AuthContext.Provider value={{ token, user, isAdmin, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

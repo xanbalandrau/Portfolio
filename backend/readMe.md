@@ -20,7 +20,6 @@ Il permet de gérer les utilisateurs, leurs compétences et leurs paramètres.
         "axios": "^1.7.9",
         "bcrypt": "^5.1.1",
         "cloudinary": "^2.5.1",
-        "cookie-parser": "^1.4.7",
         "cors": "^2.8.5",
         "dotenv": "^16.4.7",
         "express": "^4.21.2",
@@ -38,6 +37,25 @@ Il permet de gérer les utilisateurs, leurs compétences et leurs paramètres.
         "winston": "^3.17.0"
       }
 ```
+
+- **axios** : Bibliothèque pour effectuer des requêtes HTTP vers des APIs externes ou internes.
+- **bcrypt** : Utilisé pour le hachage sécurisé des mots de passe.
+- **cloudinary** : Service de gestion des médias (images, vidéos) dans le cloud, permet de stocker, manipuler et diffuser des fichiers multimédias.
+- **cors** : Middleware pour gérer les requêtes cross-origin (CORS), permettant à un serveur d'accepter des requêtes provenant de domaines différents.
+- **dotenv** : Charge les variables d'environnement à partir d'un fichier .env, utile pour la configuration sécurisée de l'application.
+- **express** : Framework pour construire des applications web et des APIs en Node.js.
+- **express-async-handler** : Simplifie la gestion des erreurs dans les routes asynchrones avec Express.
+- **fs** : Module natif de Node.js pour interagir avec le système de fichiers (lecture, écriture, etc.).
+- **gitignore** : Utilitaire pour générer des fichiers .gitignore afin d'exclure certains fichiers du contrôle de version Git.
+- **helmet** : Middleware pour sécuriser les applications Express en définissant divers en-têtes HTTP.
+- **joi** : Bibliothèque de validation des données, souvent utilisée pour valider les entrées utilisateur.
+- **jsonwebtoken** : Utilisé pour créer et vérifier des tokens JWT (JSON Web Tokens), souvent pour l'authentification.
+- **mongoose** : Bibliothèque pour modéliser les objets MongoDB et interagir avec la base de données.
+- **morgan** : Middleware de logging pour Express, enregistre les requêtes HTTP pour le débogage.
+- **multer** : Middleware pour gérer le téléversement (upload) de fichiers dans les applications Express.
+- **nodemailer** : Bibliothèque pour envoyer des emails depuis une application Node.js.
+- **nodemon** : Outil pour redémarrer automatiquement l'application Node.js lors de la modification des fichiers, utile en développement.
+- **winston** : Bibliothèque de logging flexible pour Node.js, permet de gérer les logs de manière structurée.
 
 ## Installation
 
@@ -169,7 +187,6 @@ Réponse attendue :
 | **GET**    | `/api/auth//verify/:token`        | ❌    | ❌    | Envoie un email de vérification          |
 | **POST**   | `/api/auth/register`              | ❌    | ❌    | Créer un utilisateur                     |
 | **POST**   | `/api/auth/login`                 | ❌    | ❌    | Se connecter                             |
-| **POST**   | `/api/auth/check-auth`            | ✅    | ❌    | Verifie si connecter (possède le token)  |
 | **POST**   | `/api/auth/logout`                | ✅    | ❌    | Se déconnecter                           |
 | **POST**   | `/api/auth/forgot-password`       | ❌    | ❌    | Envoie email pour reset son mot de passe |
 | **POST**   | `/api/auth/reset-password/:token` | ❌    | ❌    | Mettre à jour son mot de passe           |
@@ -191,22 +208,16 @@ Utilisation de nodemailer pour la vérification de l'utilisateur. Un token est g
 
 ### Authentification:
 
-Utilisation de JWT pour l'authentification. Un token est généré lors de la connexion et est inclus dans le header `Cookies`.
-Etant en cookies, on ne pourra pas le récuperer dans le frontend. Par conséquent, on va utiliser la route `/api/auth/check-auth` pour verifier l'authentification de l'utilisateur, et on renverra true ou false.
+Utilisation de JWT pour l'authentification. Un token est généré lors de la connexion et est inclus dans le header de la requetes.
 
 ### Autorisation:
 
 Certaines routes sont réservées aux utilisateurs ou aux administrateurs. Le middleware `authMiddleware.js` vérifie le rôle de l'utilisateur avant d'autoriser l'accès.
 
-## reCAPTCHA:
+### reCAPTCHA:
 
 Intégration de reCAPTCHA pour prévenir les bots.
 
 ## Auteur:
 
 Xan Balandrau : [**GitHub**](https://github.com/xanbalandrau/)
-
-## Amélioration future
-
-- Ajout photo de profil pour l'utilisateur
-- Ajout description (bio) de l'utilisateur

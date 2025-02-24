@@ -15,12 +15,13 @@ import Dashboard from "../admin/Dashboard";
 import ProtectedRoute from "./ProtectedRoutes";
 import AdminProtectedRoutes from "./AdminProtectedRoutes";
 
-import Navbar from "../components/partials/navbar/Navbar";
+import NavBar from "../components/partials/navbar/Navbar";
+import Footer from "../components/partials/footer/Footer";
 
 const AppRoutes = () => {
   return (
     <Router>
-      <Navbar />
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
@@ -54,6 +55,7 @@ const AppRoutes = () => {
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      <Footer />
     </Router>
   );
 };

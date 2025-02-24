@@ -1,0 +1,51 @@
+.footer {
+  position: relative;
+  z-index: 1 !important;
+  background-color: var(--secondary-color);
+  padding: 20px 0;
+}
+
+.footer-text {
+  color: white;
+  font-weight: bold;
+  margin: auto;
+  text-align: center;
+  align-items: center;
+}
+
+.footer-link {
+  color: white;
+  font-weight: bold;
+  font-size: large;
+}
+
+.footer-copywright {
+  margin: auto !important;
+}
+
+/* CSS styles for the cookie button */
+.cookie-button {
+  background-color: var(--third-color);
+  color: white;
+  padding: 12px 20px;
+  margin: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cookie-button:hover {
+  background-color: var(--third-color);
+  transform: scale(1.05);
+}
+
+.cookie-button:focus {
+  outline: none;
+  box-shadow: 0 0 10px var(--third-color);
+}
+
+.cookie-button:active {
+  transform: scale(0.98);
+}
