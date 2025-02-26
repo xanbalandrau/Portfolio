@@ -61,19 +61,19 @@ Il permet de gérer les utilisateurs, leurs compétences et leurs paramètres.
 
 1. Allez dans le dossier backend si ce n'est pas déjà fait :
 
-```
+```bash
 cd backend
 ```
 
 2. Installez les dépendances :
 
-```
+```bash
 npm install
 ```
 
 3. Créez puis configurez le fichier .env :
 
-```
+```ini
 PORT = 5000
 MONGO_URI = <votre URI de connexion MongoDB>
 CLOUD_NAME = <votre nom de compte Cloudinary>
@@ -90,13 +90,13 @@ EMAIL_PORT= <465 pour SSL ou 587 pour TLS par exemple>
 
 4. Lancez le serveur:
 
-```
+```bash
 npm start
 ```
 
 Pour lancer en mode développement :
 
-```
+```bash
 npm run dev
 ```
 
@@ -104,34 +104,35 @@ npm run dev
 
 Pour se connecter en tant que admin :
 
-```
+```bash
     email : admin@gmail.com,
     password : adminpassword
 ```
 
 Exemple de requête (dans le terminal) pour se connecter :
 
-```
+```bash
 curl -X POST http://localhost:5000/api/auth/login -H "Content-Type: applicat
 ion/json" -d '{"email": "admin@gmail.com", "password": "adminpassword"}'
 ```
 
 Réponse attendue :
 
-```
-{"success":true,
-"message":"User logged in successfully",
-"user": {
-    "_id":"67b89e0eebbbf9d655d648dd",
-    "name":"admin",
-    "email":"admin@gmail.com",
-    "password":"$2b$10$hPCs9CwBH6wTW.yCNRSZeO9SlzYzahs5GURY7RnsB7VugasV/UMtW",
-    "role":"admin",
-    "skill":["67b89e2debbbf9d655d648e2"],
-    "createdAt":"2025-02-21T15:38:54.164Z",
-    "updatedAt":"2025-02-21T15:39:25.271Z",
-    "__v":0
-    }
+```json
+{
+  "success": true,
+  "message": "User logged in successfully",
+  "user": {
+    "_id": "67b89e0eebbbf9d655d648dd",
+    "name": "admin",
+    "email": "admin@gmail.com",
+    "password": "$2b$10$hPCs9CwBH6wTW.yCNRSZeO9SlzYzahs5GURY7RnsB7VugasV/UMtW",
+    "role": "admin",
+    "skill": ["67b89e2debbbf9d655d648e2"],
+    "createdAt": "2025-02-21T15:38:54.164Z",
+    "updatedAt": "2025-02-21T15:39:25.271Z",
+    "__v": 0
+  }
 }
 ```
 

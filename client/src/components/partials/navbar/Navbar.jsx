@@ -59,7 +59,7 @@ const NavBar = () => {
               <>
                 <Nav.Item>
                   <Link to="/register" onClick={() => updateExpanded(false)}>
-                    Resgister
+                    Register
                   </Link>
                 </Nav.Item>
                 <Nav.Item>

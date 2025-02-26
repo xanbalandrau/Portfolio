@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -11,7 +11,7 @@ import OngletTitle from "../../hooks/OngletTitle";
 import "./Login.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
-// const SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+const SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
 const Login = () => {
   OngletTitle("Login");
@@ -22,11 +22,11 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  // const [recaptcha, setRecaptcha] = useState("");
+  const [recaptcha, setRecaptcha] = useState("");
 
-  // const onCaptchaChange = (val) => {
-  //   setRecaptcha(val);
-  // };
+  const onCaptchaChange = (val) => {
+    setRecaptcha(val);
+  };
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(`${API_URL}/api/auth/login`, data);
@@ -79,12 +79,9 @@ const Login = () => {
             <p className="text-error">{errors.password.message}</p>
           )}
         </div>
-        {/* <div className="mb-3 d-flex justify-content-center">
-          <ReCAPTCHA
-            sitekey={SITE_KEY}
-            onChange={onCaptchaChange}
-          />
-        </div> */}
+        <div className="mb-3 d-flex justify-content-center">
+          <ReCAPTCHA sitekey={SITE_KEY} onChange={onCaptchaChange} />
+        </div>
 
         <button
           type="submit"
@@ -93,6 +90,9 @@ const Login = () => {
         >
           Login
         </button>
+        <div className="text-center">
+          <Link to={`/forgot-password`}>password forget</Link>
+        </div>
       </form>
     </Container>
   );

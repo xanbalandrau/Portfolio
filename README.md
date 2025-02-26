@@ -36,25 +36,14 @@ Vous allez concevoir une application **MERN** permettant aux utilisateurs de gé
 ## Features
 
 - 🎨 **Interface moderne et responsive**
-  Design élégant et adaptatif, avec support des thèmes sombre et clair pour une expérience utilisateur personnalisée.
+- 📱 **Interface mobile-frist**
 - 🔒 **Système d'authentification sécurisé**
-  Connexion et inscription sécurisées avec hachage de mot de passe (bcrypt) et tokens JWT pour une protection optimale des données utilisateurs.
-- 👩‍💻 **Tableau de bord administrateur**
-  Gestion centralisée des utilisateurs, des compétences (skills) et des paramètres de l'application pour les administrateurs.
-- 📱 **Interface mobile-friendly**
-  Une expérience utilisateur optimisée pour les appareils mobiles, avec un design fluide et intuitif.
-- 🔄 **Chargement dynamique du contenu**
-  Affichage fluide des données grâce à des requêtes asynchrones et une mise à jour dynamique de l'interface.
 - 📝 **Gestion des compétences et du profil**
-  Ajout, modification et suppression des compétences (skills) par les utilisateurs, avec validation et notation optionnelles.
 - 📧 **Envoi d'e-mails automatisés**
-  Fonctionnalités d'envoi d'e-mails pour la vérification de compte, la réinitialisation de mot de passe et les notifications.
 - 🍪 **Gestion des cookies conforme au RGPD**
-  Intégration de tarteaucitron.js pour une gestion transparente et conforme des cookies.
 - 📊 **Journalisation des activités (logging)**
-  Utilisation de Winston pour enregistrer les logs d'activité et les erreurs, facilitant le débogage et la maintenance.
 - ⚙️ **Paramètres personnalisables**
-  Options pour personnaliser le thème, la forme des compétences (skills) et d'autres préférences utilisateur.
+- 👩‍💻 **Tableau de bord administrateur**
 
 ## Technologies:
 
@@ -98,7 +87,7 @@ Cloner le repository:
 
 - `npm install`
 
-3. Créez et configurez votre .env (pour plus de détails lire le readme.md du backend)
+3. Créez et configurez votre .env (pour plus de détails lire le readme du backend).
 
 4. Lancez le back-end :
 
@@ -118,7 +107,7 @@ Le back-end sera lancé à l'URL:
 
 - `npm install`
 
-3. Créez et configurez votre .env (pour plus de détails lire le readme.md du client)
+3. Créez et configurez votre .env (pour plus de détails lire le readme du client)
 
 4. Lancer le front-end:
 

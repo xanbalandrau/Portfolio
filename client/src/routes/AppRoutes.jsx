@@ -17,15 +17,19 @@ import AdminProtectedRoutes from "./AdminProtectedRoutes";
 
 import NavBar from "../components/partials/navbar/Navbar";
 import Footer from "../components/partials/footer/Footer";
+import Forgot from "../pages/forget-password/Forgot";
+import Reset from "../pages/forget-password/Reset";
 
 const AppRoutes = () => {
   return (
     <Router>
       <NavBar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<Forgot />} />
+        <Route path="/reset-password/:token" element={<Reset />} />
 
         <Route
           path="/portfolio"

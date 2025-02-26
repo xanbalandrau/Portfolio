@@ -12,6 +12,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.14.0/tarteaucitron.min.js"></script>
     <script>
+      tarteaucitronForceLanguage = navigator.language || navigator.userLanguage;
       tarteaucitron.init({
         privacyUrl: "" /* Privacy policy url */,
         bodyPosition:
@@ -62,7 +63,6 @@
         googleConsentMode: true /* Enable Google Consent Mode v2 for Google ads and GA4 */,
 
         partnersList: false /* Details the number of partners on the popup and middle banner */,
-        language: "fr",
       });
     </script>
 

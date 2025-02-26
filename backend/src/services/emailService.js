@@ -9,13 +9,13 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const sendEmail = async (to, subject, text) => {
+const sendEmail = async (to, subject, HtmlContent) => {
   try {
     const info = await transporter.sendMail({
       from: "noreply@monapp.com",
       to,
       subject,
-      text,
+      html: HtmlContent,
     });
 
     console.log("📩 Email sending successfully :", info.messageId);

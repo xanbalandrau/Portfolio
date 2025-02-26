@@ -145,8 +145,6 @@ export const updateSkill = async (req, res, next) => {
     let urlImage = req.body.urlImage;
     let public_id = req.body.public_id;
 
-    console.log(req.body);
-
     if (req.file) {
       if (req.body.public_id) {
         try {

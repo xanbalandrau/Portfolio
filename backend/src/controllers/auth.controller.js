@@ -17,6 +17,7 @@ import {
 import { deleteSkillWithUser } from "./skill.controller.js";
 
 const API_URL = process.env.API_URL;
+const API_URL_FRONT = process.env.API_URL_FRONT;
 
 export const createUser = async (req, res, next) => {
   const { error, value } = registerSchema.validate(req.body);
@@ -49,11 +50,15 @@ export const createUser = async (req, res, next) => {
 
     const token = generateTokenFast(newUser);
     const verifyUrl = `${API_URL}/api/auth/verify/${token}`;
-    await sendEmail(
-      newUser.email,
-      "Vérification de compte",
-      `Cliquez ici pour valider votre compte : ${verifyUrl}`
-    );
+
+    const verif = /* HTML */ `
+      <h1 style="color: #3498db;">Vérification de compte</h1>
+      <p>Cliquez sur le lien ci-dessous pour vérifier votre compte.:</p>
+      <a href="${verifyUrl}" style="color: #2ecc71;">Vérifier mon compte </a>
+      <p>Si vous n'avez pas demandé cette Vérification, ignorez cet e-mail.</p>
+    `;
+
+    await sendEmail(email, "Vérification de compte", verif);
 
     res.status(201).json({
       success: true,
@@ -185,6 +190,7 @@ export const verifyEmail = async (req, res, next) => {
 
 export const forgotPassword = async (req, res, next) => {
   const { error, value } = forgotPasswordSchema.validate(req.body);
+
   if (error) {
     return next(error);
   }
@@ -193,17 +199,15 @@ export const forgotPassword = async (req, res, next) => {
 
   try {
     const user = await User.findOne({ email });
+
     if (!user)
       return next({ status: 404, message: "User with this email not found" });
 
     const token = generateTokenFast(user);
 
-    const resetUrl = `${API_URL}/api/auth/reset-password/${token}`;
-    await sendEmail(
-      user.email,
-      "Réinitialisation du mot de passe",
-      `Cliquez ici : ${resetUrl}`
-    );
+    const resetUrl = `${API_URL_FRONT}/reset-password`;
+
+    await sendEmail(email, "Password Reset Request", htmlContent);
 
     res.json({ message: "Email sent for password reset" });
   } catch (error) {
