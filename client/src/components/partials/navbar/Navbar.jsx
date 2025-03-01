@@ -22,7 +22,7 @@ const NavBar = () => {
           <Link to="/" onClick={() => updateExpanded(false)}>
             <img
               className="logo d-inline-block align-top "
-              src="../../../public/portfolio-professionnel.png"
+              src="/portfolio-professionnel.png"
               alt="logo"
             />
           </Link>
