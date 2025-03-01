@@ -2,6 +2,28 @@
 
 ## Choix techniques : Explication des technologies utilisées et pourquoi
 
+### Technologies Utilisées
+
+- **Backend** : Node.js avec Express.js
+  - Framework léger et rapide pour développer une API REST.
+  - Middleware facile à configurer.
+  - JWT pour l'authentification.
+- **Base de données** : MongoDB avec Mongoose
+  - Stockage NoSQL flexible.
+  - Schéma de données adaptable aux besoins de l'application.
+- **Frontend** : React avec Vite
+  - Performances accrues avec Vite pour le développement.
+  - Gestion efficace de l'état avec React Context et useState.
+- **Stockage Cloud** : Cloudinary
+  - Gestion d'images simplifiée avec API.
+  - Optimisation automatique des images pour de meilleures performances.
+- **Déploiemen**t : Render (Backend) & Vercel (Frontend)
+  - Solutions gratuites et optimisées pour Node.js et React.
+- **Sécurité** : JWT, bcrypt, reCAPTCHA
+  - JWT pour la gestion sécurisée des sessions utilisateur.
+  - bcrypt pour le hashage des mots de passe.
+  - reCAPTCHA pour prévenir les attaques automatisées.
+
 ## Erreur :
 
 ### Table des erreurs :

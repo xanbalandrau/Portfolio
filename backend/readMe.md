@@ -15,7 +15,7 @@ Il permet de gérer les utilisateurs, leurs compétences et leurs paramètres.
 
 ## Dépendance installé
 
-```
+```json
 "dependencies": {
         "axios": "^1.7.9",
         "bcrypt": "^5.1.1",
@@ -139,7 +139,7 @@ Réponse attendue :
 
 ## Structure du projet
 
-```
+```ini
 .
 ├── node_modules                    # Dépendances installées par npm
 ├── uploads                         # Dossier pour stocker les fichiers téléchargés

@@ -6,15 +6,17 @@
 
 <h2 align="center">
   Portfolio Website<br/>
-  <a href="" target="_blank">Demo here</a>
+  <a href="https://projet-portfolio-final.vercel.app/" target="_blank">Demo du projet ici</a>
 </h2>
 <div align="center">
-  <img alt="Demo" src="" />
+  <img alt="Demo" src="./ressources/demo.png" />
 </div>
 
 ## Description :
 
 Vous allez concevoir une application **MERN** permettant aux utilisateurs de gérer et afficher leurs compétences via un portfolio dynamique. L'application devra être sécurisée, responsive (mobile-first) et conforme aux exigences RGPD avec un système de gestion des cookies (Tarteaucitron.js) et un Captcha (Google reCAPTCHA ou Tarteaucitron) pour sécuriser l’authentification.
+
+Voici les [instruction](/ressources/Eval%20Backend.pdf) de l'évaluation.
 
 ## Table des matières
 
@@ -23,8 +25,7 @@ Vous allez concevoir une application **MERN** permettant aux utilisateurs de gé
 - [Features](#features)
 - [Technologies:](#technologies)
 - [Déploiement:](#déploiement)
-- [Snapshot:](#snapshot)
-  - [Mobile](#mobile)
+- [Snapshot Mobile:](#snapshot-mobile)
   - [Dashboard Admin](#dashboard-admin)
 - [Installation:](#installation)
   - [Procédure d'installation :](#procédure-dinstallation-)
@@ -59,15 +60,11 @@ Ce projet a été construit avec les technologies suivantes :
 - [Vercel Front-End Deployment](https://projet-portfolio-final.vercel.app/)
 - [Render Back-end Deployment](https://portfolio-ofmh.onrender.com)
 
-## Snapshot:
-
-### Mobile
-
-<img src="" width="1200">
+## Snapshot Mobile:
 
 ### Dashboard Admin
 
-![Dashboard]()
+<img src="./ressources/dashboard.png" width="1000">
 
 ## Installation:
 
@@ -121,6 +118,7 @@ Le front-end sera lancé à l'URL:
 - Ajout photo de profil pour l'utilisateur
 - Ajout description (bio) de l'utilisateur
 - Ajout spinner pour le chargement des skills
+- Configurer l'envoie de mail pour validation du user et reset password (pour l'instant en local avec mailtrap)
 
 ## Auteur:
 

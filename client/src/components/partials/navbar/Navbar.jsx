@@ -37,16 +37,16 @@ const NavBar = () => {
           <span className="navbar-toggler-icon "></span>
         </Navbar.Toggle>
 
-        <Navbar.Collapse id="responsive-navbar-nav">
+        <Navbar.Collapse id="responsive-navbar-nav ">
           <Nav className="ms-auto" defaultActiveKey="#home">
             {user ? (
               <>
-                <Nav.Item>
+                <Nav.Item className="mb-2 mt-2">
                   <Link to="/portfolio" onClick={() => updateExpanded(false)}>
                     Portfolio
                   </Link>
                 </Nav.Item>
-                <Nav.Item>
+                <Nav.Item className="mb-2">
                   <Link
                     to="/dashboardUser"
                     onClick={() => updateExpanded(false)}
@@ -55,7 +55,7 @@ const NavBar = () => {
                   </Link>
                 </Nav.Item>
                 {isAdmin ? (
-                  <Nav.Item>
+                  <Nav.Item className="mb-2">
                     <Link to="/dashboard" onClick={() => updateExpanded(false)}>
                       Dashboard Admin
                     </Link>
@@ -63,18 +63,18 @@ const NavBar = () => {
                 ) : (
                   ""
                 )}
-                <Nav.Item>
+                <Nav.Item className="mb-2">
                   <LogoutButton />
                 </Nav.Item>
               </>
             ) : (
               <>
-                <Nav.Item>
+                <Nav.Item className="mb-2 mt-2">
                   <Link to="/register" onClick={() => updateExpanded(false)}>
                     Register
                   </Link>
                 </Nav.Item>
-                <Nav.Item>
+                <Nav.Item className="mb-2">
                   <Link to="/login" onClick={() => updateExpanded(false)}>
                     Login
                   </Link>

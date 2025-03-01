@@ -1,4 +1,5 @@
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import OngletTitle from "../../hooks/OngletTitle";
 import "./Home.css";
@@ -74,7 +75,11 @@ const Home = () => {
           <Row>
             <Col md={4}>
               <Card className="portfolio-card">
-                <Card.Img variant="top" src="/portfolio-dev.png" />
+                <Card.Img
+                  variant="top"
+                  src="/portfolio-dev.png"
+                  alt="portfolio de John"
+                />
                 <Card.Body>
                   <Card.Title>Portfolio de John Doe</Card.Title>
                   <Card.Text>
@@ -85,7 +90,11 @@ const Home = () => {
             </Col>
             <Col md={4}>
               <Card className="portfolio-card">
-                <Card.Img variant="top" src="/portfolio-design.png" />
+                <Card.Img
+                  variant="top"
+                  src="/portfolio-design.png"
+                  alt="portfolio de Jane"
+                />
                 <Card.Body>
                   <Card.Title>Portfolio de Jane Smith</Card.Title>
                   <Card.Text>
@@ -96,7 +105,11 @@ const Home = () => {
             </Col>
             <Col md={4}>
               <Card className="portfolio-card">
-                <Card.Img variant="top" src="/portfolio-photographe.png" />
+                <Card.Img
+                  variant="top"
+                  src="/portfolio-photographe.png"
+                  alt="portfolio d'Alex"
+                />
                 <Card.Body>
                   <Card.Title>Portfolio de Alex Johnson</Card.Title>
                   <Card.Text>
@@ -151,9 +164,11 @@ const Home = () => {
           <Row className="text-center">
             <Col>
               <h2>Prêt à créer votre portfolio ?</h2>
-              <Button variant="primary" size="lg" href="/register">
-                Commencer maintenant
-              </Button>
+              <Link to="/register">
+                <Button variant="primary" size="lg">
+                  Commencer maintenant
+                </Button>
+              </Link>
             </Col>
           </Row>
         </Container>
