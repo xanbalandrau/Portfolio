@@ -1,0 +1,51 @@
+/* Styles pour la section Hero */
+.hero-section {
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 100px 0;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+.text-underline {
+  text-decoration: underline;
+  font-weight: bolder;
+}
+
+/* Styles pour les sections */
+.features-section,
+.portfolio-showcase,
+.testimonials-section,
+.cta-section {
+  padding: 80px 0;
+}
+
+.feature-item,
+.testimonial-item {
+  padding: 20px;
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #007bff;
+}
+
+.portfolio-card {
+  margin-bottom: 20px;
+}
+
+.cta-section {
+  padding: 100px 0;
+}

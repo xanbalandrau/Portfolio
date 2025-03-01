@@ -11,7 +11,7 @@ const LogoutButton = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.post(`${API_URL}/api/auth/logout`, {});
-
+      alert(response.data.message);
       AuthContext.logout();
       navigate("/login");
     } catch (error) {
@@ -19,7 +19,11 @@ const LogoutButton = () => {
     }
   };
 
-  return <button onClick={handleLogout}>Logout</button>;
+  return (
+    <button className="btn btn-danger" onClick={handleLogout}>
+      Logout
+    </button>
+  );
 };
 
 export default LogoutButton;

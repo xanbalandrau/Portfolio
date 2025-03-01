@@ -205,7 +205,9 @@ export const forgotPassword = async (req, res, next) => {
 
     const token = generateTokenFast(user);
 
-    const resetUrl = `${API_URL_FRONT}/reset-password`;
+    const resetUrl = `${API_URL_FRONT}/reset-password/${token}`;
+
+    const htmlContent = `<p>Click <a href="${resetUrl}">here</a> to reset your password</p>`;
 
     await sendEmail(email, "Password Reset Request", htmlContent);
 

@@ -1,7 +1,7 @@
 import { Card, Badge } from "react-bootstrap";
 import "./Skill.css";
 
-const SkillCards = (props) => {
+const SkillCircle = (props) => {
   const getBadgeColor = (category) => {
     switch (category) {
       case "Backend":
@@ -27,11 +27,10 @@ const SkillCards = (props) => {
         return "black";
     }
   };
-
   return (
-    <Card className="project-card-view">
+    <Card className="project-card-view rounded-card">
       <Card.Img
-        className="image-card"
+        className="image-card rounded-image"
         variant="top"
         src={props.urlImage}
         alt={props.title}
@@ -51,4 +50,4 @@ const SkillCards = (props) => {
   );
 };
 
-export default SkillCards;
+export default SkillCircle;

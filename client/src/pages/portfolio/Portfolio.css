@@ -1,0 +1,12 @@
+.theme-light {
+  position: relative;
+  background-color: rgb(255, 255, 255) !important;
+  color: black;
+  z-index: 0 !important;
+}
+
+.theme-dark {
+  background-color: black;
+  color: white;
+  z-index: -2 !important;
+}

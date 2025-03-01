@@ -28,15 +28,17 @@ const Register = () => {
     }
   };
   return (
-    <Container className="container d-flex justify-content-center align-items-center vh-100 min-vw-100">
+    <Container className="container d-flex justify-content-center align-items-center mt-5">
       <form
         onSubmit={handleSubmit(createUser)}
-        className="formLogin p-4 border rounded shadow bg-light"
+        className="formLogin p-4 border rounded shadow bg-light m-5"
       >
-        <h1 className="text-center mb-4">Créer un compte</h1>
+        <h1 className="text-center mb-4 text-black">Créer un compte</h1>
 
         <div className="mb-3">
-          <label htmlFor="name">Name</label>
+          <label className="text-black" htmlFor="name">
+            Name
+          </label>
           <input
             type="text"
             id="name"
@@ -57,7 +59,9 @@ const Register = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="email">Email</label>
+          <label className="text-black" htmlFor="email">
+            Email
+          </label>
           <input
             type="email"
             id="email"
@@ -74,7 +78,9 @@ const Register = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="password">Password</label>
+          <label className="text-black" htmlFor="password">
+            Password
+          </label>
           <input
             type="password"
             id="password"

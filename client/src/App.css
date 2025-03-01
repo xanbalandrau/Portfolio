@@ -1,0 +1,65 @@
+/* Grid app */
+html,
+body,
+#root,
+.app-container {
+  height: 100%;
+  color: white;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  background: url("./assets/moon-7946.gif") no-repeat center center fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
+
+/* CSS styles for the light theme in Portfolio */
+.light-theme {
+  position: fixed;
+  z-index: 0 !important;
+  width: 100vw;
+  height: 100vh;
+  background: url("./assets/stars-12673.gif") no-repeat center center fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
+.settings {
+  position: relative;
+  z-index: 1 !important;
+}
+.btn-icon {
+  background-color: transparent;
+  border: none;
+  color: #696969;
+  font-size: 1.5rem;
+  padding: 10px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-icon:hover {
+  transform: scale(1.2);
+}
+
+.btn-icon:active {
+  transform: scale(1);
+}
+
+/* CSS styles for the dark theme in Portfolio */
+#tsparticles {
+  position: fixed !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  width: 100% !important;
+  z-index: 0 !important;
+}

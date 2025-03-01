@@ -5,7 +5,7 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <Container fluid className="footer">
+    <Container fluid className="footer mt-auto py-3">
       <Row>
         <Col md="4" className="footer-copywright">
           <p className="footer-text">
@@ -13,6 +13,7 @@ const Footer = () => {
             <a
               href="https://github.com/xanbalandrau/Portfolio"
               target="_blank"
+              rel="noopener noreferrer"
               className="footer-link"
             >
               Xan

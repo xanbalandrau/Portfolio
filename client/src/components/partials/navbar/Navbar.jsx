@@ -10,11 +10,21 @@ const NavBar = () => {
   const [expand, updateExpanded] = useState(false);
 
   return (
-    <Navbar expanded={expand} fixed="top" expand="md" className="navbar">
+    <Navbar
+      expanded={expand}
+      fixed="top"
+      expand="md"
+      className="navbar"
+      data-bs-theme="dark"
+    >
       <Container>
         <NavbarBrand>
           <Link to="/" onClick={() => updateExpanded(false)}>
-            Home
+            <img
+              className="logo d-inline-block align-top "
+              src="../../../public/portfolio-professionnel.png"
+              alt="logo"
+            />
           </Link>
         </NavbarBrand>
 
@@ -24,7 +34,7 @@ const NavBar = () => {
             updateExpanded(expand ? false : "expanded");
           }}
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon "></span>
         </Navbar.Toggle>
 
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -45,9 +55,11 @@ const NavBar = () => {
                   </Link>
                 </Nav.Item>
                 {isAdmin ? (
-                  <Link to="/dashboard" onClick={() => updateExpanded(false)}>
-                    Dashboard Admin
-                  </Link>
+                  <Nav.Item>
+                    <Link to="/dashboard" onClick={() => updateExpanded(false)}>
+                      Dashboard Admin
+                    </Link>
+                  </Nav.Item>
                 ) : (
                   ""
                 )}

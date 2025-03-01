@@ -111,7 +111,7 @@ Le back-end sera lancé à l'URL:
 
 4. Lancer le front-end:
 
-- `npm start`
+- `npm run dev`
 
 Le front-end sera lancé à l'URL:
 `http://localhost:5173`
@@ -120,6 +120,7 @@ Le front-end sera lancé à l'URL:
 
 - Ajout photo de profil pour l'utilisateur
 - Ajout description (bio) de l'utilisateur
+- Ajout spinner pour le chargement des skills
 
 ## Auteur:
 

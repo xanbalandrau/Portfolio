@@ -139,6 +139,11 @@ const dashboardUser = () => {
     }
   };
 
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => setShowModal(true);
+
+  const handleCloseModal = () => setShowModal(false);
   return (
     <div className="container mt-5">
       <h2 className="text-center mb-4">Dashboard</h2>
@@ -205,13 +210,13 @@ const dashboardUser = () => {
       {/* List of skills */}
       <h3 className="text">Liste des compétences</h3>
       <ul
-        className="list-group"
+        className="list-group m-4"
         style={{ display: "flex", flexDirection: "column-reverse" }}
       >
         {skills.map((skill) => (
           <li
             key={skill._id}
-            className="list-group-item d-flex justify-content-between align-items-center"
+            className="list-group-item d-flex justify-content-between align-items-center mb-2"
           >
             {editSkill && editSkill._id === skill._id ? (
               <>
@@ -267,15 +272,20 @@ const dashboardUser = () => {
                     />
                   </div>
                 </div>
-                <button className="btn btn-success me-2" onClick={updateSkill}>
-                  Enregistrer
-                </button>
-                <button
-                  className="btn btn-secondary "
-                  onClick={() => setEditSkill(null)}
-                >
-                  Annuler
-                </button>
+                <div>
+                  <button
+                    className="btn btn-success me-2 w-100"
+                    onClick={updateSkill}
+                  >
+                    Enregistrer
+                  </button>
+                  <button
+                    className="btn btn-secondary w-100"
+                    onClick={() => setEditSkill(null)}
+                  >
+                    Annuler
+                  </button>
+                </div>
               </>
             ) : (
               <>
@@ -300,11 +310,56 @@ const dashboardUser = () => {
                   </button>
                   <button
                     className="btn btn-danger w-100"
-                    onClick={() => deleteSkill(skill._id)}
+                    onClick={handleShowModal}
                   >
                     Supprimer
                   </button>
                 </div>
+                {showModal && (
+                  <div
+                    className="modal"
+                    style={{
+                      display: "block",
+                      backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    }}
+                  >
+                    <div className="modal-dialog modal-dialog-centered">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 className="modal-title">
+                            Confirmer la suppression
+                          </h5>
+                          <button
+                            type="button"
+                            className="btn-close"
+                            onClick={handleCloseModal}
+                          ></button>
+                        </div>
+                        <div className="modal-body">
+                          Etes-vous sur de vouloir supprimer cet utilisateur ?
+                        </div>
+                        <div className="modal-footer">
+                          <button
+                            type="button"
+                            className="btn btn-secondary"
+                            onClick={handleCloseModal}
+                          >
+                            Annuler
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-danger"
+                            onClick={() =>
+                              deleteSkill(skill._id) && handleCloseModal()
+                            }
+                          >
+                            Supprimer
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </>
             )}
           </li>

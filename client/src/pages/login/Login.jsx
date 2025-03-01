@@ -38,14 +38,14 @@ const Login = () => {
   };
 
   return (
-    <Container className="container d-flex justify-content-center align-items-center vh-100 min-vw-100">
+    <Container className="container d-flex justify-content-center align-items-center mt-5">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="formLogin p-4 border rounded shadow bg-light"
+        className="formLogin p-4 m-5 border rounded shadow bg-light"
       >
-        <h1 className="text-center mb-4">Connexion</h1>
+        <h1 className="text-center mb-4 text-black" >Connexion</h1>
         <div className="mb-3">
-          <label htmlFor="email">Email</label>
+          <label className="text-black" htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
@@ -61,7 +61,7 @@ const Login = () => {
           {errors.email && <p className="text-error">{errors.email.message}</p>}
         </div>
         <div className="mb-3">
-          <label htmlFor="password">Password</label>
+          <label className="text-black" htmlFor="password">Password</label>
           <input
             type="password"
             id="password"

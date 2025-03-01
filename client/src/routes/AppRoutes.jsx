@@ -23,43 +23,47 @@ import Reset from "../pages/forget-password/Reset";
 const AppRoutes = () => {
   return (
     <Router>
-      <NavBar />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<Forgot />} />
-        <Route path="/reset-password/:token" element={<Reset />} />
+      <div className="app-container">
+        <NavBar />
+        <main className="main-content">
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<Forgot />} />
+            <Route path="/reset-password/:token" element={<Reset />} />
 
-        <Route
-          path="/portfolio"
-          element={
-            <ProtectedRoute>
-              <Portfolio />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/dashboardUser"
-          element={
-            <ProtectedRoute>
-              <DashboardUser />
-            </ProtectedRoute>
-          }
-        />
+            <Route
+              path="/portfolio"
+              element={
+                <ProtectedRoute>
+                  <Portfolio />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboardUser"
+              element={
+                <ProtectedRoute>
+                  <DashboardUser />
+                </ProtectedRoute>
+              }
+            />
 
-        <Route
-          path="/dashboard"
-          element={
-            <AdminProtectedRoutes>
-              <Dashboard />
-            </AdminProtectedRoutes>
-          }
-        />
+            <Route
+              path="/dashboard"
+              element={
+                <AdminProtectedRoutes>
+                  <Dashboard />
+                </AdminProtectedRoutes>
+              }
+            />
 
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-      <Footer />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
   );
 };
