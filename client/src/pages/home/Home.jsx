@@ -74,7 +74,7 @@ const Home = () => {
           <Row>
             <Col md={4}>
               <Card className="portfolio-card">
-                <Card.Img variant="top" src="../../assets/portfolio-dev.png" />
+                <Card.Img variant="top" src="/portfolio-dev.png" />
                 <Card.Body>
                   <Card.Title>Portfolio de John Doe</Card.Title>
                   <Card.Text>
@@ -85,10 +85,7 @@ const Home = () => {
             </Col>
             <Col md={4}>
               <Card className="portfolio-card">
-                <Card.Img
-                  variant="top"
-                  src="../../public/portfolio-design.png"
-                />
+                <Card.Img variant="top" src="/portfolio-design.png" />
                 <Card.Body>
                   <Card.Title>Portfolio de Jane Smith</Card.Title>
                   <Card.Text>
@@ -99,10 +96,7 @@ const Home = () => {
             </Col>
             <Col md={4}>
               <Card className="portfolio-card">
-                <Card.Img
-                  variant="top"
-                  src="../../public/portfolio-photographe.png"
-                />
+                <Card.Img variant="top" src="/portfolio-photographe.png" />
                 <Card.Body>
                   <Card.Title>Portfolio de Alex Johnson</Card.Title>
                   <Card.Text>
