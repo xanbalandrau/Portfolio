@@ -74,7 +74,7 @@ const Home = () => {
           <Row>
             <Col md={4}>
               <Card className="portfolio-card">
-                <Card.Img variant="top" src="../../public/portfolio-dev.png" />
+                <Card.Img variant="top" src="../../assets/portfolio-dev.png" />
                 <Card.Body>
                   <Card.Title>Portfolio de John Doe</Card.Title>
                   <Card.Text>

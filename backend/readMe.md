@@ -81,10 +81,11 @@ API_KEY = <votre clé API Cloudinary>
 API_SECRET = <votre clé secrète API Cloudinary>
 JWT_SECRET = <votre clé secrète pour JWT>
 API_URL = <votre URL du backend>
+API_URL_FRONT = <votre URL du frontend>
 RECAPTCHA_SECRET_KEY = <votre clé secrète reCAPTCHA>
 EMAIL_HOST= <votre service SMTP>
 EMAIL_USER= <votre adresse e-mail>
-EMAIL_PASS= <mot de passe d'application ou mot de passe SMTP>
+EMAIL_PASS= <mot de passe d application ou mot de passe SMTP>
 EMAIL_PORT= <465 pour SSL ou 587 pour TLS par exemple>
 ```
 
