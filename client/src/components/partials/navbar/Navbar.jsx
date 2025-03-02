@@ -41,7 +41,7 @@ const NavBar = () => {
           <Nav className="ms-auto" defaultActiveKey="#home">
             {user ? (
               <>
-                <Nav.Item className="mb-2 mt-2">
+                <Nav.Item className="mb-2">
                   <Link to="/portfolio" onClick={() => updateExpanded(false)}>
                     Portfolio
                   </Link>
@@ -63,7 +63,7 @@ const NavBar = () => {
                 ) : (
                   ""
                 )}
-                <Nav.Item className="mb-2">
+                <Nav.Item>
                   <LogoutButton />
                 </Nav.Item>
               </>

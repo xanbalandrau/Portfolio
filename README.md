@@ -64,7 +64,7 @@ Ce projet a été construit avec les technologies suivantes :
 
 ### Dashboard Admin
 
-<img src="./ressources/dashboard.png" width="1000">
+<img src="./ressources/dashboard.png" width="250">
 
 ## Installation:
 

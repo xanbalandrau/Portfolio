@@ -17,7 +17,8 @@
   z-index: 0 !important;
   width: 100vw;
   height: 100vh;
-  background: url("./assets/stars-12673.gif") no-repeat center center fixed;
+  background: url("./../../assets/stars-12673.gif") no-repeat center center
+    fixed;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -30,8 +31,8 @@
 .btn-icon {
   background-color: transparent;
   border: none;
-  color: #696969;
-  font-size: 1.5rem;
+  color: gray !important;
+  font-size: 2rem !important;
   padding: 10px;
   transition: color 0.3s ease, transform 0.3s ease;
 }
