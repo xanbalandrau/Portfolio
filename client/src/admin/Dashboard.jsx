@@ -37,7 +37,7 @@ const Dashboard = () => {
   };
   return (
     <>
-      <h3 className="text-center">Liste des utilisateurs</h3>
+      <h3 className="text-center m-5">Liste des utilisateurs</h3>
       <ul
         className="list-group"
         style={{ display: "flex", flexDirection: "column-reverse" }}
@@ -45,7 +45,7 @@ const Dashboard = () => {
         {users.map((user) => (
           <li
             key={user._id}
-            className="list-group-item d-flex justify-content-between align-items-center w-75 mx-auto"
+            className="list-group-item d-flex justify-content-between align-items-center w-75 mx-auto mb-1"
           >
             <div>
               <p className="mb-1">
@@ -92,7 +92,9 @@ const Dashboard = () => {
                       <button
                         type="button"
                         className="btn btn-danger"
-                        onClick={() => deleteUser(user._id)}
+                        onClick={() =>
+                          deleteUser(user._id) && handleCloseModal()
+                        }
                       >
                         Supprimer
                       </button>

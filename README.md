@@ -37,7 +37,7 @@ Voici les [instruction](/ressources/Eval%20Backend.pdf) de l'évaluation.
 ## Features
 
 - 🎨 **Interface moderne et responsive**
-- 📱 **Interface mobile-frist**
+- 📱 **Interface mobile-first**
 - 🔒 **Système d'authentification sécurisé**
 - 📝 **Gestion des compétences et du profil**
 - 📧 **Envoi d'e-mails automatisés**

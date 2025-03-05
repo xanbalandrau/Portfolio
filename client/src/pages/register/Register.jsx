@@ -2,14 +2,20 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Container } from "react-bootstrap";
+import { FaEyeSlash } from "react-icons/fa6";
+import { IoIosEye } from "react-icons/io";
 
 import OngletTitle from "../../hooks/OngletTitle";
+import { useState } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 const Register = () => {
   OngletTitle("Register");
   const navigate = useNavigate();
+  const [messageEmail, setMessageEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -17,20 +23,44 @@ const Register = () => {
   } = useForm();
   const createUser = async (data) => {
     try {
-      console.log(data);
-
       const response = await axios.post(`${API_URL}/api/auth/register`, data);
       alert(response.data.message);
 
       navigate("/login");
     } catch (error) {
+      if (error.response.data.message === "User already exists") {
+        setMessageEmail("L'email est deja utilisé");
+      }
       console.log("Register failed :", error);
     }
   };
+
+  const handlePassword = (data) => {
+    const { password } = data;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (password !== confirmPassword) {
+      setMessage("Les mots de passe ne correspondent pas");
+      return false;
+    }
+    setMessage("");
+    return true;
+  };
+
+  const onSubmit = (data) => {
+    if (handlePassword(data)) {
+      createUser(data);
+    }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <Container className="container d-flex justify-content-center align-items-center mt-5">
       <form
-        onSubmit={handleSubmit(createUser)}
+        onSubmit={handleSubmit(onSubmit)}
         className="formLogin p-4 border rounded shadow bg-light m-5"
       >
         <h1 className="text-center mb-4 text-black">Créer un compte</h1>
@@ -75,28 +105,52 @@ const Register = () => {
             })}
           />
           {errors.email && <p className="text-error">{errors.email.message}</p>}
+          {messageEmail && <p className="text-error">{messageEmail}</p>}
         </div>
 
         <div className="mb-3">
           <label className="text-black" htmlFor="password">
             Password
           </label>
-          <input
-            type="password"
-            id="password"
-            className="form-control"
-            {...register("password", {
-              required: "Password is required",
-              minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters long",
-              },
-            })}
-          />
+          <div className="input-group">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              className="form-control mb-3"
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters long",
+                },
+              })}
+            />
+            <button
+              type="button"
+              className="btn btn-outline-secondary control mb-3"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <IoIosEye /> : <FaEyeSlash />}
+            </button>
+          </div>
           {errors.password && (
             <p className="text-error">{errors.password.message}</p>
           )}
         </div>
+
+        <div className="mb-3">
+          <label className="text-black" htmlFor="confirmPassword">
+            Confirm Password
+          </label>
+          <input
+            type={showPassword ? "text" : "password"}
+            id="confirmPassword"
+            className="form-control mb-3"
+          />
+
+          {message && <p className="text-error">{message}</p>}
+        </div>
+
         <button type="submit" className="btn btn-primary w-100">
           Créer
         </button>

@@ -25,6 +25,7 @@ Il permet de s'inscrire, de se connecter et de gérer un portfolio.
     "react-hook-form": "^7.54.2",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.2.0",
+    "react-toastify": "^11.0.5",
     "react-tsparticles": "^2.12.2",
     "tarteaucitronjs": "^1.19.0",
     "tsparticles-slim": "^2.12.0"
@@ -42,6 +43,7 @@ Il permet de s'inscrire, de se connecter et de gérer un portfolio.
 - **react-hook-form** : Simplifie la gestion des formulaires et la validation des données.
 - **react-icons** : Fournit une collection d'icônes populaires pour les interfaces React.
 - **react-router-dom** : Gère la navigation et le routage dans une application React.
+- **react-toastify** : Ajoute notif pour les chargements
 - **react-tsparticles** : Ajoute des animations de particules interactives aux pages web.
 - **tarteaucitronjs** : Outil de gestion des cookies conforme au RGPD.
 - **tsparticles-slim** : Version légère de tsparticles pour les animations de particules
