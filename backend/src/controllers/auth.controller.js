@@ -51,14 +51,14 @@ export const createUser = async (req, res, next) => {
     const token = generateTokenFast(newUser);
     const verifyUrl = `${API_URL}/api/auth/verify/${token}`;
 
-    const verif = /* HTML */ `
+    const htmlContent = /* HTML */ `
       <h1 style="color: #3498db;">Vérification de compte</h1>
       <p>Cliquez sur le lien ci-dessous pour vérifier votre compte.:</p>
       <a href="${verifyUrl}" style="color: #2ecc71;">Vérifier mon compte </a>
       <p>Si vous n'avez pas demandé cette Vérification, ignorez cet e-mail.</p>
     `;
 
-    await sendEmail(email, "Vérification de compte", verif);
+    await sendEmail(email, "Vérification de compte", htmlContent);
 
     res.status(201).json({
       success: true,

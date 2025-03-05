@@ -25,7 +25,7 @@ const Register = () => {
   } = useForm();
   const createUser = async (data) => {
     try {
-      const toastId = toast.info("Connexion en cours...", {
+      const toastId = toast.info("Création en cours...", {
         position: "top-center",
         autoClose: false,
         hideProgressBar: false,
@@ -173,6 +173,7 @@ const Register = () => {
           {isLoading ? "Création en cours..." : "Créer un compte"}
         </button>
       </form>
+      <ToastContainer />
     </Container>
   );
 };

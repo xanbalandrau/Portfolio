@@ -117,7 +117,7 @@ Le front-end sera lancé à l'URL:
 
 - Ajout photo de profil pour l'utilisateur
 - Ajout description (bio) de l'utilisateur
-- Ajout spinner pour le chargement des skills
+- ~~Ajout spinner pour la connexion et la création d'un compte~~
 - Configurer l'envoie de mail pour validation du user et reset password (pour l'instant en local avec mailtrap)
 
 ## Auteur:
