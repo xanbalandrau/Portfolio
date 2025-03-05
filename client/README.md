@@ -163,6 +163,7 @@ Ce projet suit une architecture modulaire et bien organisée en React, facilitan
 │── index.html
 │── package.json
 │── README.md
+│── vercel.json
 │── vite.config.js
 
 ```
