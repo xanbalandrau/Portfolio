@@ -35,20 +35,17 @@ const Login = () => {
   };
   const onSubmit = async (data) => {
     try {
-      const notify = () =>
-        toast.info("Connexion en cours...", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          newestOnTop: false,
-          closeOnClick: false,
-          rtl: false,
-          theme: "light",
-        });
+      const toastId = toast.info("Connexion en cours...", {
+        position: "top-center",
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: false,
+        theme: "light",
+      });
       setIsLoading(true);
       const response = await axios.post(`${API_URL}/api/auth/login`, data);
 
-      toast.dismiss(notify);
+      toast.dismiss(toastId);
       AuthContext.login(response.data.token);
       navigate("/dashboardUser");
     } catch (error) {
@@ -127,15 +124,15 @@ const Login = () => {
         <button
           type="submit"
           className="btn btn-primary w-100"
-          disabled={!recaptcha}
+          disabled={!recaptcha || isLoading}
         >
-          Login
+          {isLoading ? "Connexion en cours..." : " Login"}
         </button>
         <div className="text-center mt-2">
           <Link to={`/forgot-password`}>password forget</Link>
         </div>
       </form>
-      {isLoading ? <ToastContainer /> : ""}
+      <ToastContainer />
     </Container>
   );
 };
