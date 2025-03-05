@@ -4,6 +4,7 @@ import axios from "axios";
 import { Container } from "react-bootstrap";
 import { FaEyeSlash } from "react-icons/fa6";
 import { IoIosEye } from "react-icons/io";
+import { ToastContainer, toast } from "react-toastify";
 
 import OngletTitle from "../../hooks/OngletTitle";
 import { useState } from "react";
@@ -16,6 +17,7 @@ const Register = () => {
   const [messageEmail, setMessageEmail] = useState("");
   const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -23,7 +25,19 @@ const Register = () => {
   } = useForm();
   const createUser = async (data) => {
     try {
+      const toastId = toast.info("Connexion en cours...", {
+        position: "top-center",
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: false,
+        theme: "light",
+      });
+      setIsLoading(true);
+
       const response = await axios.post(`${API_URL}/api/auth/register`, data);
+
+      toast.dismiss(toastId);
+
       alert(response.data.message);
 
       navigate("/login");
@@ -151,8 +165,12 @@ const Register = () => {
           {message && <p className="text-error">{message}</p>}
         </div>
 
-        <button type="submit" className="btn btn-primary w-100">
-          Créer
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="btn btn-primary w-100"
+        >
+          {isLoading ? "Création en cours..." : "Créer un compte"}
         </button>
       </form>
     </Container>

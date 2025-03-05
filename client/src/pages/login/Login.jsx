@@ -43,6 +43,7 @@ const Login = () => {
         theme: "light",
       });
       setIsLoading(true);
+      
       const response = await axios.post(`${API_URL}/api/auth/login`, data);
 
       toast.dismiss(toastId);
