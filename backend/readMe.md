@@ -180,6 +180,10 @@ Réponse attendue :
 │   ├── server.js                   # Point d'entrée principal du serveur
 ```
 
+## Diagramme de class UML
+
+<img src = "../ressources/UML.png" width="500">
+
 ## API Endpoints
 
 | Méthode    | Endpoint                          | Login | Admin | Description                              |

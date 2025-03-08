@@ -118,7 +118,9 @@ Le front-end sera lancé à l'URL:
 - Ajout photo de profil pour l'utilisateur
 - Ajout description (bio) de l'utilisateur
 - ~~Ajout spinner pour la connexion et la création d'un compte~~
-- Configurer l'envoie de mail pour validation du user et reset password (pour l'instant en local avec mailtrap)
+- ~~Configurer l'envoie de mail pour validation du user et reset password (pour l'instant en local avec mailtrap)~~
+- Possibilité pour admin de voir les portfolio des users
+- Pouvoir s'inscrire directement avec google ou github
 
 ## Auteur:
 

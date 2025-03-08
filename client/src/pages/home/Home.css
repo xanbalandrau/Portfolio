@@ -49,3 +49,7 @@
 .cta-section {
   padding: 100px 0;
 }
+
+.card-body {
+  height: 150px;
+}

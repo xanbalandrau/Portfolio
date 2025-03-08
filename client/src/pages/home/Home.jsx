@@ -80,7 +80,7 @@ const Home = () => {
                   src="/portfolio-dev.png"
                   alt="portfolio de John"
                 />
-                <Card.Body>
+                <Card.Body className="card-body">
                   <Card.Title>Portfolio de John Doe</Card.Title>
                   <Card.Text>
                     Un portfolio élégant et professionnel pour un développeur.
@@ -107,7 +107,7 @@ const Home = () => {
               <Card className="portfolio-card">
                 <Card.Img
                   variant="top"
-                  src="/portfolio-photographe.png"
+                  src="/portfolio_photographe.png"
                   alt="portfolio d'Alex"
                 />
                 <Card.Body>

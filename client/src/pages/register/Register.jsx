@@ -38,7 +38,10 @@ const Register = () => {
 
       toast.dismiss(toastId);
 
-      alert(response.data.message);
+      alert(
+        response.data.message +
+          " Un email de confirmation vous a été envoyé, regardez vos spams si vous ne trouvez pas l'email"
+      );
 
       navigate("/login");
     } catch (error) {

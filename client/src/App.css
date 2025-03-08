@@ -15,7 +15,7 @@ body,
 
 .main-content {
   flex: 1;
-  background: url("./assets/moon-7946.gif") no-repeat center center fixed;
+  background: url("./assets/bg_moon.png") no-repeat center center fixed;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
