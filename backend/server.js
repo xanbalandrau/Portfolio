@@ -17,21 +17,7 @@ app.use(morganMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
-app.use(
-  cors({
-    origin: [
-      process.env.API_URL_FRONT || "http://localhost:5173",
-      ,
-      "https://www.google.com", // For reCAPTCHA
-      "https://www.gstatic.com", // For reCAPTCHA
-      "https://res.cloudinary.com", // For Cloudinary
-    ],
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    exposedHeaders: ["Retry-After", "RateLimit-Reset", "Set-Cookie", "ETag"],
-    maxAge: 86400, // 24 hours
-  })
-);
+app.use(cors());
 
 connectDB();
 
