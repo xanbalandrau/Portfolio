@@ -53,7 +53,9 @@ export const createUser = async (req, res, next) => {
     const htmlContent = /* HTML */ `
       <h1 style="color: #3498db;">Vérification de compte</h1>
       <p>Cliquez sur le lien ci-dessous pour vérifier votre compte.:</p>
-      <a href="${verifyUrl}" style="color: #2ecc71;">Vérifier mon compte </a>
+      <a href="${verifyUrl}" style="color: #2ecc71;"
+        >Vérifier mon compte : ${verifyUrl}
+      </a>
       <p>Si vous n'avez pas demandé cette Vérification, ignorez cet e-mail.</p>
     `;
 
