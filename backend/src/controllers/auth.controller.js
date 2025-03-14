@@ -24,7 +24,7 @@ export const createUser = async (req, res, next) => {
   if (error) {
     return next(error);
   }
-  const { name, email, password, role } = value;
+  const { name, email, password } = value;
 
   try {
     const user = await User.findOne({ email });
@@ -39,7 +39,6 @@ export const createUser = async (req, res, next) => {
       name,
       email,
       password: hashedPassword,
-      role,
     });
 
     const newSettings = new Settings({ userId: newUser.id });

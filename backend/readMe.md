@@ -103,18 +103,11 @@ npm run dev
 
 ## Utilisation
 
-Pour se connecter en tant que admin :
-
-```bash
-    email : admin@gmail.com,
-    password : adminpassword
-```
-
 Exemple de requête (dans le terminal) pour se connecter :
 
 ```bash
 curl -X POST http://localhost:5000/api/auth/login -H "Content-Type: applicat
-ion/json" -d '{"email": "admin@gmail.com", "password": "adminpassword"}'
+ion/json" -d '{"email": "", "password": ""}'
 ```
 
 Réponse attendue :
@@ -126,7 +119,7 @@ Réponse attendue :
   "user": {
     "_id": "67b89e0eebbbf9d655d648dd",
     "name": "admin",
-    "email": "admin@gmail.com",
+    "email": "",
     "password": "$2b$10$hPCs9CwBH6wTW.yCNRSZeO9SlzYzahs5GURY7RnsB7VugasV/UMtW",
     "role": "admin",
     "skill": ["67b89e2debbbf9d655d648e2"],

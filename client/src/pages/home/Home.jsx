@@ -80,7 +80,7 @@ const Home = () => {
                   src="/portfolio-dev.png"
                   alt="portfolio de John"
                 />
-                <Card.Body className="card-body">
+                <Card.Body className="home_card">
                   <Card.Title>Portfolio de John Doe</Card.Title>
                   <Card.Text>
                     Un portfolio élégant et professionnel pour un développeur.
@@ -95,7 +95,7 @@ const Home = () => {
                   src="/portfolio-design.png"
                   alt="portfolio de Jane"
                 />
-                <Card.Body>
+                <Card.Body className="home_card">
                   <Card.Title>Portfolio de Jane Smith</Card.Title>
                   <Card.Text>
                     Un portfolio créatif pour une designer graphique.
@@ -110,7 +110,7 @@ const Home = () => {
                   src="/portfolio_photographe.png"
                   alt="portfolio d'Alex"
                 />
-                <Card.Body>
+                <Card.Body className="home_card">
                   <Card.Title>Portfolio de Alex Johnson</Card.Title>
                   <Card.Text>
                     Un portfolio minimaliste pour un photographe.
